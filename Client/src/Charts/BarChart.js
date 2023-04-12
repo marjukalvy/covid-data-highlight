@@ -14,11 +14,14 @@ function BarChart() {
   const [endYear, setEndYear] = useState(2022);
   const [selectedCountry1, setSelectedCountry1] = useState('');
   const [selectedCountry2, setSelectedCountry2] = useState('');
+  const [selectedCountry1Details, setSelectedCountry1Details] = useState('');
+  const [selectedCountry2Details, setSelectedCountry2Details] = useState('');
+
   const [list, setList] = useState([]);
   const [countryList, setCountryList] = useState([]);
 
   const handleCountrySelect = (country) => {
-    setSelectedCountry1(country);
+    selectedCountry1 ? setSelectedCountry2(country) : setSelectedCountry1(country);
   };
 
   const classes = useStyles();
@@ -40,7 +43,13 @@ function BarChart() {
     return countryListTemp;
   };
 
+  const setCountryInfo = (key1, key2) => {
+    let item = countryList.find((item) => item.name === key1);
+    setSelectedCountry1Details(item);
 
+    item = countryList.find((item) => item.name === key2);
+    setSelectedCountry2Details(item);
+  };
 
   useEffect(() => {
 
@@ -58,6 +67,7 @@ function BarChart() {
       setCountryList(countryList);
     };
     fetchCovidData();
+    setCountryInfo(selectedCountry1, selectedCountry2)
   }, [startYear, endYear, selectedCountry1, selectedCountry2]);
 
   return (

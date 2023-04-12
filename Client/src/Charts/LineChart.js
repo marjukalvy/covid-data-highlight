@@ -53,14 +53,12 @@ const LineChart = ({ country1Data, country2Data }) => {
     svg.append('text')
       .attr('x', margin.left)
       .attr('y', margin.top - 10)
-      .text(country1Data.name)
       .style('font-size', '16px')
       .style('font-weight', 'bold');
 
     svg.append('text')
       .attr('x', margin.left)
       .attr('y', margin.top - 30)
-      .text(country2Data.name)
       .style('font-size', '16px')
       .style('font-weight', 'bold');
 
