@@ -14,6 +14,7 @@ import '../App.css';
 const CovidMap = () => {
   const [option, setOption] = useState(getCountryFilterOptions().population_density);
   const [covidOption, setcovidOption] = useState(getCovidFilterOptions().people_fully_vaccinated);
+  let [countryColour, setCountryColour] = useState([]);
 
   const worldCountryMap = useRef(null);
   const worldVaccinationMap = useRef(null);
@@ -105,7 +106,7 @@ const CovidMap = () => {
         <div style="font-size: 16px; font-weight: bold; text-align: center; margin-bottom: 10px; margin-bottom: 10px;padding: 5px; background-color: rgba(116, 170, 209, 0.8);border-radius:15px;">${country}</div>
         <Divider class=${classes.divider} />
         <div style="font-size: 14px; text-align: center;">
-          <span>${option}: ${itemInfo}</span>
+          <span>${TopicService.getCurrentOption()}: ${itemInfo}</span>
         </div>  
       </div>
       `)
@@ -132,7 +133,10 @@ const CovidMap = () => {
       })
       .on("click", function (event, d) {
         if (selectedCountry) {
+          selectedCountry.attr("fill", "#f7fbff");
+          d3.select(this).attr("fill", "#ffb6c1");
           selectedCountry.attr("stroke", "none");
+          selectedCountry.attr("stroke", "#f7fbff");
           if (selectedCountryCovidInformation) selectedCountryCovidInformation.attr("stroke", "none");
           tooltipPermCovid.style("opacity", 0);
           selectedCountry = null;
@@ -156,10 +160,10 @@ const CovidMap = () => {
         tooltipCountry.transition().duration(200).style("opacity", 1);
         tooltipCountry.html(`
       <div>
-        <div style="font-size: 16px; font-weight: bold; text-align: center; margin-bottom: 10px;padding: 5px; background-color: rgba(116, 170, 209, 0.8);border-radius:15px;">${country}</div>
+        <div style="font-size: 16px; font-weight: bold; text-align: center; margin-bottom: 10px;padding: 5px; background-color: #ffb6c1;border-radius:15px;">${country}</div>
         <Divider class=${classes.divider} />
         <div style="font-size: 14px; text-align: center;">
-          <span>${option}: ${itemInfo}</span>
+          <span>${TopicService.getCurrentOption()}: ${itemInfo}</span>
         </div>  
       </div>
       `)
@@ -262,7 +266,7 @@ const CovidMap = () => {
         <div>
           <div style="font-size: 16px; font-weight: bold; text-align: center; margin-bottom: 10px; margin-bottom: 10px;padding: 5px; background-color: rgba(116, 170, 209, 0.8);border-radius:15px;">${country}</div>
           <Divider class=${classes.divider} />
-          <div style="font-size: 14px; text-align: center;">${option}: ${itemInfo}</div>  
+          <div style="font-size: 14px; text-align: center;">${TopicService.getCurrentOption()}: ${itemInfo}</div>  
         </div>
         `)
           .style("border", "1px solid #ccc")
@@ -311,10 +315,10 @@ const CovidMap = () => {
         tooltipPermCovid.transition().duration(200).style("opacity", 1);
         tooltipPermCovid.html(`
           <div>
-            <div style="font-size: 16px; font-weight: bold; text-align: center; margin-bottom: 10px; margin-bottom: 10px;padding: 5px; background-color: rgba(116, 170, 209, 0.8);border-radius:15px;;border-radius:15px;">${country}</div>
+            <div style="font-size: 16px; font-weight: bold; text-align: center; margin-bottom: 10px; margin-bottom: 10px;padding: 5px; background-color: #ffb6c1;border-radius:15px;;border-radius:15px;">${country}</div>
             <Divider class=${classes.divider} />
             <div style="font-size: 14px; text-align: center;">
-              <span>${option}: ${itemInfo}</span>
+              <span>${TopicService.getCurrentOption()}: ${itemInfo}</span>
             </span>  
           </div>
         `)

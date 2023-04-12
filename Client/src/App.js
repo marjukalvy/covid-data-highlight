@@ -12,6 +12,9 @@ function App() {
     <div className="App">
       <div>
         <div>
+          <header>
+            <h1>Comparative</h1>
+          </header>
           <CovidMap />
           <BarChart />
         </div>

@@ -36,51 +36,36 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.storeData = exports.getCovidInformation = exports.getCountryData = exports.getCovidData = void 0;
-var CountryDataService_1 = require("./DataService/CountryDataService");
-var CovidInformationDataService_1 = require("./DataService/CovidInformationDataService");
-var DataService_1 = require("./DataService/DataService");
-function getCovidData(req, res) {
-    var covidData = (0, CountryDataService_1.CountryDataService)();
-    res.json(covidData);
-}
-exports.getCovidData = getCovidData;
-function getCountryData(req, res) {
-    var countryData = (0, CovidInformationDataService_1.CovidInformationDataService)();
-    res.json(countryData);
-}
-exports.getCountryData = getCountryData;
-function getCovidInformation(req, res) {
-    var startYear = Number(req.query.startYear);
-    var endYear = Number(req.query.endYear);
-    /* if (!ValidationService.validateYearParams(startYear, endYear)) {
-      let err = new Error("Invalid year parameters");
-      ExceptionService.errorHandler(err, req, res);
-    } else {
-      res.json(CovidInformationBetweenTwoYears(startYear, endYear));
-    } */
-    res.json((0, CovidInformationDataService_1.CovidInformationBetweenTwoYears)(startYear, endYear));
-}
-exports.getCovidInformation = getCovidInformation;
-function storeData(req, res) {
+exports.getDataAndStore = void 0;
+var axios_1 = require("axios");
+var fs = require("fs");
+var ExceptionService_1 = require("./ExceptionService");
+// Define the async function to retrieve data and store it in a file
+function getDataAndStore() {
     return __awaiter(this, void 0, void 0, function () {
-        var error_1;
+        var response, data, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, (0, DataService_1.getDataAndStore)()];
+                    return [4 /*yield*/, axios_1.default.get('https://covid.ourworldindata.org/data/owid-covid-data')];
                 case 1:
-                    _a.sent();
-                    res.send('Data stored successfully');
+                    response = _a.sent();
+                    data = response.data;
+                    // Store the JSON object in a file using fs.writeFile()
+                    fs.writeFile('vaccinations.json', JSON.stringify(data), function (err) {
+                        if (err)
+                            throw err;
+                        console.log("Data successfully stored in vaccinations.json!");
+                    });
                     return [3 /*break*/, 3];
                 case 2:
                     error_1 = _a.sent();
-                    res.status(500).send('Error storing data');
+                    ExceptionService_1.ExceptionService.fileErrorHandler(error_1);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
         });
     });
 }
-exports.storeData = storeData;
+exports.getDataAndStore = getDataAndStore;

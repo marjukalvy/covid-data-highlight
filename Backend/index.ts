@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { Request, Response } from 'express';
-import { getCovidData, getCountryData, getCovidInformation } from './apiController';
+import { getCovidData, getCountryData, getCovidInformation, storeData } from './apiController';
 
 const app = express();
 const port = 5000;
@@ -20,6 +20,9 @@ app.get('/get-country-data', getCountryData);
 
 //Covid Information
 app.get('/get-covid-information', getCovidInformation);
+
+//Pull data
+app.get('/pull-data', storeData);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

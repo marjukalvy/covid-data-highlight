@@ -31,9 +31,7 @@ const CustomChart = ({ data }) => {
       .append('text')
       .attr('y', margin.bottom - 10)
       .attr('x', width / 2)
-      .attr('fill', '#000')
       .attr('font-size', '14px')
-      .text('Date');
 
     g
       .append('g')
@@ -55,7 +53,6 @@ const CustomChart = ({ data }) => {
     newBarGroups
       .append('rect')
       .attr('class', 'bar')
-      .attr('x', (d) => x(new Date(d.date)))
       .attr('y', (d) => y(d.new_deaths))
       .attr('height', (d) => height - y(d.new_deaths))
       .attr('width', width / data.length)
@@ -82,7 +79,7 @@ const CustomChart = ({ data }) => {
     };
   }, [drawChart]);
 
-  return <svg ref={svgRef} width="960" height="500" />;
+  return <svg ref={svgRef} width="900" height="500" />;
 };
 
 export default CustomChart;

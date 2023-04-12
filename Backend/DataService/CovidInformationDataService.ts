@@ -3,6 +3,8 @@ import { CovidAccumulatedData } from '../Model/CovidAccumulatedData';
 const covidData = require('../jsonData/owid-covid-data.json');
 
 let responseData: CovidAccumulatedData[];
+let startYear: number = 2018;
+let endYear: number = 2022;
 
 const CountryInformationWithCovid = Object.keys(covidData).map(key => {
   return {
@@ -42,9 +44,6 @@ const CountryInformationWithCovid = Object.keys(covidData).map(key => {
   }
 });
 
-
-let startYear: number = 2021;
-let endYear: number = 2022;
 let CountryInformationBasedOnYear = Object.keys(covidData).map(key => {
   return {
     iso_code: key,

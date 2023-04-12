@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CovidInformationBetweenTwoYears = exports.CovidInformationDataService = void 0;
 var covidData = require('../jsonData/owid-covid-data.json');
 var responseData;
+var startYear = 2018;
+var endYear = 2022;
 var CountryInformationWithCovid = Object.keys(covidData).map(function (key) {
     return {
         iso_code: key,
@@ -40,8 +42,6 @@ var CountryInformationWithCovid = Object.keys(covidData).map(function (key) {
         })
     };
 });
-var startYear = 2021;
-var endYear = 2022;
 var CountryInformationBasedOnYear = Object.keys(covidData).map(function (key) {
     return {
         iso_code: key,

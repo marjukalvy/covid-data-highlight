@@ -14,4 +14,10 @@ export const useStyles = makeStyles((theme) => ({
     worldMapContainer: {
         width: '80%',
     },
+    alignColumn: {
+        margin: theme.spacing(2, 0),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
 }));

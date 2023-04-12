@@ -4,6 +4,7 @@ exports.ExceptionService = void 0;
 var ExceptionService = /** @class */ (function () {
     function ExceptionService() {
     }
+    // Error handler for HTTP requests
     ExceptionService.errorHandler = function (err, req, res) {
         if (err.status) {
             res.status(err.status).json({
@@ -18,12 +19,13 @@ var ExceptionService = /** @class */ (function () {
             });
         }
     };
+    // Error handler for file operations
     ExceptionService.fileErrorHandler = function (err) {
         if (err.status) {
             console.log(err.message);
         }
         else {
-            console.log("Error occured fetching File");
+            console.log("Error occurred fetching file");
         }
     };
     return ExceptionService;

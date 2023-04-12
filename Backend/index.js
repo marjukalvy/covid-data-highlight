@@ -16,6 +16,8 @@ app.get('/get-covid-data', apiController_1.getCovidData);
 app.get('/get-country-data', apiController_1.getCountryData);
 //Covid Information
 app.get('/get-covid-information', apiController_1.getCovidInformation);
+//Pull data
+app.get('/pull-data', apiController_1.storeData);
 app.listen(port, function () {
     console.log("Server running at http://localhost:".concat(port));
 });
